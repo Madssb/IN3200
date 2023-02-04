@@ -3,6 +3,13 @@
 #include <time.h>
 #include <limits.h> //INT_MAX lives here
 
+/*
+ * Author: Mads S. Balto
+ * Date: 04/02/23
+ * Description:
+ * this script initializes a 1D array, with a length specified at runtime with pseudo-random integers randing from 0 to 100. It evaluates this array,
+ * finding the largest, and the smallest elements respectively. 
+ */
 
 
 int find_max_array_element(int *array, int array_size)
