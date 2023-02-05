@@ -84,6 +84,7 @@ clock_t measure_clock_cycles(int** (*initialization_method)(unsigned int, unsign
 
 int main()
 {
+    srand(time(NULL)); // seed the random number generator to known value
     unsigned int rows = 10000;
     unsigned int cols = 10000;
     int ** matrix1 = initialize_matrix_random_elements_row_first(rows,cols);

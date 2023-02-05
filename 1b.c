@@ -11,11 +11,16 @@
  * finding the largest, and the smallest elements respectively. 
  */
 
-
-int find_max_array_element(int *array, int array_size)
+/**
+ * @brief Finds the largest element within a provided 1D array.
+ * @param array Pointer to one-dimensional array, consisting of (unsigned) integers. In current implementation, function is not tested to handle signed integers.
+ * @param array_size Amount of elements contained within provided array.
+ * @return The largest integer found within provided array. 
+ */
+double find_max_array_element(double *array, size_t array_size)
 {
-    int largest_element = 0;
-    for(int index = 0; index < array_size; index++)
+    double largest_element = 0.;
+    for(size_t index = 0; index < array_size; index++)
     {
         if (array[index] > largest_element)
         {
@@ -25,11 +30,10 @@ int find_max_array_element(int *array, int array_size)
     return largest_element;
 }
 
-
-int find_min_array_element(int *array, int array_size)
+double find_min_array_element(double *array, size_t array_size)
 {
-    int smallest_element = INT_MAX;
-    for(int index = 0; index < array_size; index++)
+    double smallest_element = (double)INT_MAX;
+    for(size_t index = 0; index < array_size; index++)
     {
         if (array[index] < smallest_element)
         {
@@ -39,28 +43,34 @@ int find_min_array_element(int *array, int array_size)
     return smallest_element;
 }
 
-
-int * initialize_array_random_elements(int array_size)
+double double_pseudo_rng()
 {
-    srand(time(NULL)); // seed the random number generator to known value
-    //int array[array_size];
-    int *array;
-    array = malloc(array_size * sizeof(int));
-    int bytesize_array = sizeof(array);
-    printf("size of array: %d\n",bytesize_array);
-    for(int index= 0; index<array_size; index++)
+    double rand_double = (double)rand()/(double)RAND_MAX;
+    if(rand() & 1)
     {
-        array[index] = rand() % 100;
+        rand_double *= -1;
+    }
+    rand_double *= rand();
+    return rand_double;
+}
+double * initialize_array_random_elements(size_t array_size)
+{
+    srand((unsigned int)time(NULL)); // seed the random number generator to known value
+    //int array[array_size];
+    double *array;
+    array = malloc(array_size * sizeof(double));
+    for(size_t index= 0; index<array_size; index++)
+    {
+        array[index] = double_pseudo_rng();
     }
     return array;
 }
 
-
-void print_array_contents(int *array,int array_size)
+void print_array_contents(double *array,size_t array_size)
 {
-    for (int index = 0; index < array_size; index++)
+    for (size_t index = 0; index < array_size; index++)
     {
-        printf("%d ", array[index]);
+        printf("%f ", array[index]);
     }
     printf("\n");
 }
@@ -68,14 +78,22 @@ void print_array_contents(int *array,int array_size)
 
 int main()
 {
-    srand(time(NULL)); // seed the random number generator to known value
-    int array_size;
-    printf("Define the size of the array:");
-    scanf("%d",&array_size);
-    int *array = initialize_array_random_elements(array_size);
+    int array_size_input;
+    printf("Define the size of the array (unsigned integer required):");
+    if((scanf("%d",&array_size_input) ==1) && (array_size_input > 0))
+    {
+        printf("Succesful input!\n");
+    }
+    else
+    {
+        printf("Unsuccesful input! You provided: %d\n",array_size_input);
+        return 0;
+    }
+    size_t array_size = (size_t)array_size_input;
+    double *array = initialize_array_random_elements(array_size);
     print_array_contents(array,array_size);
-    int max_element = find_max_array_element(array,array_size);
-    int min_element = find_min_array_element(array,array_size);
-    printf("max element: %d, min element: %d. \n",max_element,min_element);
+    double max_element = find_max_array_element(array,array_size);
+    double min_element = find_min_array_element(array,array_size);
+    printf("max element: %f, min element: %f. \n",max_element,min_element);
     return 0;
 }
