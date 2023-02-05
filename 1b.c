@@ -6,15 +6,17 @@
  * Author: Mads S. Balto
  * Date: 04/02/23
  * Description:
- * this script initializes a 1D array, with a length specified at runtime with pseudo-random integers randing from 0 to 100. It evaluates this array,
- * finding the largest, and the smallest elements respectively. 
+ * this script initializes a one-dimensional array, with a length specified at runtime with pseudo-random-like doubles.
+ * It evaluates this array, finding the largest, and the smallest elements respectively. 
  */
 
 /**
  * @brief Finds the largest element within a provided one-dimensional array.
  * 
- * @param array Pointer to one-dimensional array consisting of floats.
- * @param array_size Amount of floats contained within provided array. If array_size exceeds actual array size, non-allocated memory will be attempted accessed. If provided array size falls short of actual array size, the largest element may not be found. 
+ * @param array Pointer to one-dimensional array consisting of doubles.
+ * @param array_size Number of doubles contained within provided array. 
+ * If array_size exceeds actual array size, non-allocated memory will be attempted to be accessed. 
+ * If provided array size falls short of actual array size, the largest element may not be found. 
  * @return Largest float found within provided array. if empty array is provided, returns negative infinity.
  */
 double find_max_array_element(double *array, size_t array_size)
@@ -32,8 +34,10 @@ double find_max_array_element(double *array, size_t array_size)
 /**
  * @brief Finds the smallest element within a provided one-dimensional array.
  * 
- * @param array Pointer to one-dimensional array consisting of floats.
- * @param array_size Amount of floating point values contained within provided array. If array_size exceeds actual array size, non-allocated memory will be attempted accessed. If array_size falls short of actual array size, the smallest element may not be found. 
+ * @param array Pointer to one-dimensional array consisting of doubles.
+ * @param array_size Number of doubles contained within provided array. 
+ * If array_size exceeds actual array size, non-allocated memory will be attempted accessed. 
+ * If array_size falls short of actual array size, the smallest element may not be found. 
  * @return Smallest float foudn within provided array. If empty array is provided, returns infinity
  */
 double find_min_array_element(double *array, size_t array_size)
@@ -66,13 +70,12 @@ double double_pseudo_rng()
 /**
  * @brief Initializes one-dimensional array of fixed length with pseudo-random-like doubles.
  * 
- * @param array_size Amount of floating point values contained within provided array.
- * @return Pointer to array consisting of pseudo-random-like doubles.
+ * @param array_size Number of doubles contained within provided array.
+ * @return double* Pointer to array consisting of pseudo-random-like doubles.
  */
 double * initialize_array_random_elements(size_t array_size)
 {
     srand((unsigned int)time(NULL)); // seed the random number generator to known value
-    //int array[array_size];
     double *array;
     array = malloc(array_size * sizeof(double));
     for(size_t index= 0; index<array_size; index++)
@@ -85,7 +88,8 @@ double * initialize_array_random_elements(size_t array_size)
  * @brief prints the elements of a provided one-dimensional array to the terminal. 
  * 
  * @param array Pointer to one-dimensional array with double elements.
- * @param array_size expected amount of elements stored in array. if array_size exceeds actual array size, dereferences an invalid pointer. If array_size falls short of actual array size, function does not print all elements of array.
+ * @param array_size expected Number of elements stored in array. if array_size exceeds actual array size, dereferences an invalid pointer. 
+ * If array_size falls short of actual array size, function does not print all elements of array.
  */
 void print_array_contents(double *array,size_t array_size)
 {
@@ -98,7 +102,7 @@ void print_array_contents(double *array,size_t array_size)
 /**
  * @brief requires user to specify a positive integer at runtime, and returns specified value if it is positive.
  * 
- * @return size_t quantity. if input is string, or a float, undefined behavior may occur.
+ * @return size_t positive integer provided by the user if provided correctly. undefined behavior if a floating point value or a string is provided.
  */
 size_t pick_positive_number()
 {
@@ -106,7 +110,7 @@ size_t pick_positive_number()
     printf("Define the size of the array (unsigned integer required):");
     if((scanf("%d",&array_size_input) ==1) && (array_size_input > 0))
     {
-        printf("Succesful input! input will be converted to unsigned integeger: %zu\n",(size_t)array_size_input);
+        printf("Succesful input! input will be converted to unsigned integer: %zu\n",(size_t)array_size_input);
         return (size_t)array_size_input;
     }
     else
