@@ -91,30 +91,39 @@ void print_array_contents(double *array,size_t array_size)
 {
     for (size_t index = 0; index < array_size; index++)
     {
-        printf("%f ", array[index]);
+        printf("%f\n", array[index]);
     }
     printf("\n");
 }
-
-
-int main()
+/**
+ * @brief requires user to specify a positive integer at runtime, and returns specified value if it is positive.
+ * 
+ * @return size_t quantity. if input is string, or a float, undefined behavior may occur.
+ */
+size_t pick_positive_number()
 {
     int array_size_input;
     printf("Define the size of the array (unsigned integer required):");
     if((scanf("%d",&array_size_input) ==1) && (array_size_input > 0))
     {
-        printf("Succesful input!\n");
+        printf("Succesful input! input will be converted to unsigned integeger: %zu\n",(size_t)array_size_input);
+        return (size_t)array_size_input;
     }
     else
     {
-        printf("Unsuccesful input! You provided: %d\n",array_size_input);
-        return 0;
+        printf("Unsuccesful input! You provided: %d, which is negative.\n",array_size_input);
+        exit(1);
     }
-    size_t array_size = (size_t)array_size_input;
+}
+
+int main()
+{
+    size_t array_size = pick_positive_number();
     double *array = initialize_array_random_elements(array_size);
     print_array_contents(array,array_size);
     double max_element = find_max_array_element(array,array_size);
     double min_element = find_min_array_element(array,array_size);
     printf("max element: %f, min element: %f. \n",max_element,min_element);
+    free(array);
     return 0;
 }
