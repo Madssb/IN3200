@@ -53,9 +53,9 @@ double find_min_array_element(double *array, size_t array_size)
     return smallest_element;
 }
 /**
- * @brief generates a pseudo-random double, based on calls to a pseudo RNG method for integers. 
+ * @brief Generates a pseudo-random double, based on calls to a pseudo RNG method for integers. 
  * 
- * @return double of pseudo-random nature. May not be uniformly distributed. 
+ * @return double Pseudo-random-like double. May not be uniformly distributed. 
  */
 double double_pseudo_rng()
 {
@@ -88,7 +88,7 @@ double * initialize_array_random_elements(size_t array_size)
  * @brief prints the elements of a provided one-dimensional array to the terminal. 
  * 
  * @param array Pointer to one-dimensional array with double elements.
- * @param array_size expected Number of elements stored in array. if array_size exceeds actual array size, dereferences an invalid pointer. 
+ * @param array_size Expected Number of elements stored in array. if array_size exceeds actual array size, dereferences an invalid pointer. 
  * If array_size falls short of actual array size, function does not print all elements of array.
  */
 void print_array_contents(double *array,size_t array_size)
@@ -100,9 +100,9 @@ void print_array_contents(double *array,size_t array_size)
     printf("\n");
 }
 /**
- * @brief requires user to specify a positive integer at runtime, and returns specified value if it is positive.
+ * @brief Requires user to specify a positive integer at runtime, and returns specified value if it is positive.
  * 
- * @return size_t positive integer provided by the user if provided correctly. undefined behavior if a floating point value or a string is provided.
+ * @return size_t Positive integer provided by the user if provided correctly. undefined behavior if a floating point value or a string is provided.
  */
 size_t pick_positive_number()
 {
