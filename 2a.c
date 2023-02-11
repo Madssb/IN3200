@@ -32,11 +32,11 @@ void deallocate_str_array(char **matrix, size_t rows)
  * @param array_size Number of doubles contained within provided array.
  * If array_size exceeds actual array size, non-allocated memory will be attempted to be accessed.
  * If provided array size falls short of actual array size, the largest element may not be found.
- * @return Largest float found within provided array. if empty array is provided, returns negative infinity.
+ * @return Largest double found within provided array. if empty array is provided, returns negative infinity.
  */
-size_t find_max_array_element(float *array, size_t array_size)
+size_t find_max_array_element(double *array, size_t array_size)
 {
-    float largest_element = -INFINITY;
+    double largest_element = -INFINITY;
     size_t index_of_largest_element;
     for (size_t index = 0; index < array_size; index++)
     {
@@ -55,11 +55,11 @@ size_t find_max_array_element(float *array, size_t array_size)
  * @param array_size Number of doubles contained within provided array.
  * If array_size exceeds actual array size, non-allocated memory will be attempted accessed.
  * If array_size falls short of actual array size, the smallest element may not be found.
- * @return Smallest float foudn within provided array. If empty array is provided, returns infinity
+ * @return Smallest double foudn within provided array. If empty array is provided, returns infinity
  */
-size_t find_min_array_element(float *array, size_t array_size)
+size_t find_min_array_element(double *array, size_t array_size)
 {
-    float smallest_element = INFINITY;
+    double smallest_element = INFINITY;
     size_t index_of_smallest_element;
     for (size_t index = 0; index < array_size; index++)
     {
@@ -71,22 +71,21 @@ size_t find_min_array_element(float *array, size_t array_size)
     }
     return index_of_smallest_element;
 }
-float compute_standard_deviation(float *array, size_t array_size)
+double compute_standard_deviation(double *array, size_t array_size)
 {
-    float elements_sum = 0;
+    double elements_sum = 0;
     for(size_t index = 0; index<array_size; index++)
     {
         elements_sum += array[index];
     }
-
-    float expected_value = elements_sum/(float)array_size;
-    float second_sum = 0;
-    float expected_value_squared = expected_value*expected_value;
+    double expected_value = elements_sum/(double)array_size;
+    double second_sum = 0;
     for(size_t index = 0; index<array_size; index++)
     {
-        second_sum += array[index] - expected_value_squared;
+
+        second_sum += (array[index] - expected_value)*(array[index] - expected_value);
     }
-    float standard_deviation = sqrt(second_sum/(float)array_size);
+    double standard_deviation = sqrt(second_sum/(double)array_size);
     return standard_deviation;
 }
 
@@ -109,17 +108,17 @@ float compute_standard_deviation(float *array, size_t array_size)
     }
     // printf("amount of lines: %zu\n", lines);
     char **time_array = allocate_str_array(lines);
-    float *temperatures;
-    temperatures = malloc(lines * sizeof(float));
+    double *temperatures;
+    temperatures = malloc(lines * sizeof(double));
     for (size_t index = 0; index < lines; index++)
     {
-        err = fscanf(file, "%5s %f", time_array[index], &temperatures[index]);
+        err = fscanf(file, "%5s %lf", time_array[index], &temperatures[index]);
         // printf("time: %5s, temperature: %f\n", time_array[index], temperatures[index]);
     }
     size_t index_largest_temp = find_max_array_element(temperatures, lines);
     size_t index_smallest_temp = find_min_array_element(temperatures, lines);
-    float standard_deviation = compute_standard_deviation(temperatures, lines);
-    printf("The highest temperature was %.2fC at %5s, and the lowest temperature was %.2f at %5s.\n", temperatures[index_largest_temp], time_array[index_largest_temp], temperatures[index_smallest_temp], time_array[index_smallest_temp]);
+    double standard_deviation = compute_standard_deviation(temperatures, lines);
+    printf("The highest temperature was %.2lfC at %5s, and the lowest temperature was %.2lf at %5s.\n", temperatures[index_largest_temp], time_array[index_largest_temp], temperatures[index_smallest_temp], time_array[index_smallest_temp]);
     printf("The standard deviation of the data is %f.\n",standard_deviation);
     deallocate_str_array(time_array, lines);
     free(temperatures);
