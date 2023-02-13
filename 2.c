@@ -26,6 +26,9 @@ void free_2d_char_array(char **matrix, size_t rows)
     }
     free(matrix);
 }
+double find_highest_temperature(double * temperature_array, )
+
+
 
 int main()
 {
