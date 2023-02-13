@@ -9,6 +9,16 @@
 double * allocate_3d_array(size_t x, size_t y,size_t z)
 {
     double * array = malloc(x*y*z*sizeof(double))
+    for(size_t i=0; i<x;i++)
+    {
+        for(size_t j=0; j<y; j++)
+        {
+            for(size_t k=0; k<z; k++)
+            {
+                
+            }
+        }
+    }
 } 
 
 

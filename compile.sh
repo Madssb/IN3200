@@ -10,8 +10,7 @@ if [ -z "$source_file" ]; then
 fi
 
 # Compile the source file
-gcc "$source_file" -Og -ggdb3 -Wall -Wextra -Wconversion -pedantic-errors -fsanitize=address,undefined
-
+gcc "$source_file" -Og -ggdb3 -Wall -Wextra -Wconversion -pedantic-errors -fsanitize=address,undefined -lm
 # Check if the compilation was successful
 if [ $? -eq 0 ]; then
   echo "Compilation was successful."
